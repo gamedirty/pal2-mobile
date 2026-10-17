@@ -16,7 +16,7 @@ import java.io.File;
 
 public abstract class GameSetup {
     public static final String CONTAINER_NAME = "PAL2";
-    public static final int PROFILE_ID = 102;
+    public static final int PROFILE_ID = 103;
 
     public static Container findContainer(ContainerManager containerManager) {
         for (Container container : containerManager.getContainers()) {
@@ -136,14 +136,14 @@ public abstract class GameSetup {
         String profileJSON = "{\"id\": "+PROFILE_ID+", \"name\": \"PAL2\", \"cursorSpeed\": 1.0, \"elements\": ["
             // left cluster: movement + menu
             + dPad(0.14, 0.74, 1.4) + ","
-            + element("BUTTON", "SQUARE", 0.05, 0.22, "Esc", "KEY_ESC") + ","
-            + element("BUTTON", "SQUARE", 0.15, 0.10, "上页", "KEY_PG_UP") + ","
-            + element("BUTTON", "SQUARE", 0.28, 0.10, "下页", "KEY_PG_DOWN") + ","
+            + element("BUTTON", "CIRCLE", 0.05, 0.22, "Esc", "KEY_ESC") + ","
+            + element("BUTTON", "CIRCLE", 0.15, 0.10, "上页", "KEY_PG_UP") + ","
+            + element("BUTTON", "CIRCLE", 0.28, 0.10, "下页", "KEY_PG_DOWN") + ","
             // right cluster: confirm / fast-forward
-            + element("BUTTON", "SQUARE", 0.88, 0.80, "确认", "KEY_ENTER") + ","
-            + element("BUTTON", "SQUARE", 0.95, 0.62, "空格", "KEY_SPACE") + ","
+            + element("BUTTON", "CIRCLE", 0.88, 0.80, "确认", "KEY_ENTER") + ","
+            + element("BUTTON", "CIRCLE", 0.95, 0.62, "空格", "KEY_SPACE") + ","
             + "{\"type\": \"BUTTON\", \"shape\": \"SQUARE\", \"bindings\": [\"KEY_CTRL_L\", \"NONE\", \"NONE\", \"NONE\"], \"scale\": 1, \"x\": 0.80, \"y\": 0.92, \"toggleSwitch\": true, \"text\": \"快进\", \"iconId\": 0}" + ","
-            + element("BUTTON", "SQUARE", 0.93, 0.12, "取消", "KEY_ESC")
+            + element("BUTTON", "CIRCLE", 0.93, 0.12, "取消", "KEY_ESC")
             + "]}";
 
         try {
