@@ -38,11 +38,16 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release download game-data --repo "$GITHUB_REPOSITORY" \
-            --pattern 'pal2-game.tzst' --pattern 'pal2-fonts.zip' \
+            --pattern 'pal2-game.tzst.part-*' --pattern 'pal2-game.tzst' --pattern 'pal2-fonts.zip' \
             --dir downloads --clobber
-          cp downloads/pal2-game.tzst app/src/main/assets/pal2-game.tzst
+          # reassemble split archive if present (single-file variant also supported)
+          if ls downloads/pal2-game.tzst.part-* >/dev/null 2>&1; then
+            cat downloads/pal2-game.tzst.part-* > app/src/main/assets/pal2-game.tzst
+          else
+            cp downloads/pal2-game.tzst app/src/main/assets/pal2-game.tzst
+          fi
           unzip -o downloads/pal2-fonts.zip -d app/src/main/assets/
-          ls -la app/src/main/assets/ | head -20
+          ls -la app/src/main/assets/pal2-game.tzst app/src/main/assets/pal2-fonts/ | head -10
 
       - name: Build APK
         run: |
