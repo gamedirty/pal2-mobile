@@ -1,0 +1,22 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+# Game content and licensed fonts are NOT stored in the repo.
+# They ship as "game-data" release assets and are fetched by CI.
+app/src/main/assets/pal2-game.tzst
+app/src/main/assets/pal2-fonts/*
+!app/src/main/assets/pal2-fonts/README.md
+.idea/
+*.hprof
