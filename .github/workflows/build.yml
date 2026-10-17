@@ -25,9 +25,6 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK components
-        uses: android-actions/setup-android@v3
-
       - name: Install NDK 24 and CMake
         run: |
           yes | sdkmanager --install "ndk;24.0.8215888" "cmake;3.22.1" > /dev/null
