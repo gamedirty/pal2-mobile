@@ -27,8 +27,10 @@ jobs:
 
       - name: Install NDK 24 and CMake
         run: |
-          yes | sdkmanager --install "ndk;24.0.8215888" "cmake;3.22.1" > /dev/null
-          sdkmanager --list_installed | grep -E "ndk|cmake" || true
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          [ -x "$SDKMANAGER" ] || SDKMANAGER="$ANDROID_HOME/cmdline-tools/bin/sdkmanager"
+          yes | "$SDKMANAGER" --install "ndk;24.0.8215888" "cmake;3.22.1" > /dev/null
+          "$SDKMANAGER" --list_installed | grep -E "ndk|cmake" || true
 
       - name: Fetch game data and fonts from release assets
         env:
