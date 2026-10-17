@@ -52,6 +52,8 @@ public class ContainerManager {
                         if (file.getName().startsWith(RootFS.USER+"-")) {
                             Container container = new Container(Integer.parseInt(file.getName().replace(RootFS.USER+"-", "")));
                             container.setRootDir(new File(homeDir, RootFS.USER+"-"+container.id));
+                            // skip half-created containers (dir exists, config not yet written) — they used to NPE here
+                            if (!container.getConfigFile().isFile()) continue;
                             JSONObject data = new JSONObject(FileUtils.readString(container.getConfigFile()));
                             container.loadData(data);
                             containers.add(container);

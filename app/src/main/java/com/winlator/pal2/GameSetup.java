@@ -30,6 +30,16 @@ public abstract class GameSetup {
     }
 
     public static void ensureContainerAsync(final Context context, final ContainerCallback callback) {
+        // remove half-created containers (interrupted first run) that would crash the loader
+        File homeDir = new File(com.winlator.xenvironment.RootFS.find(context).getRootDir(), "home");
+        File[] dirs = homeDir.listFiles();
+        if (dirs != null) {
+            for (File d : dirs) {
+                if (d.isDirectory() && d.getName().startsWith("xuser-") && !new File(d, ".container").isFile()) {
+                    com.winlator.core.FileUtils.delete(d);
+                }
+            }
+        }
         final ContainerManager containerManager = new ContainerManager(context);
         Container existing = findContainer(containerManager);
         if (existing != null) {
