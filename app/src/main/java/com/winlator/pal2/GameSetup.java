@@ -50,9 +50,10 @@ public abstract class GameSetup {
         try {
             JSONObject data = new JSONObject();
             data.put("name", CONTAINER_NAME);
-            // 3x integer scale of the game's native 640x480 — fills a 1440p phone screen exactly, and lets
-            // cnc-ddraw do the high-quality upscaling with its shader inside the guest.
-            data.put("screenSize", "1920x1440");
+            // 2x integer scale of the game's native 640x480. Measured on a OnePlus Ace 3: the frame
+            // pipeline (X11 SHM + Java texture upload) is bandwidth-bound — 1920x1440 caps at 12fps,
+            // 1280x960 doubles it to 24fps while staying integer-scaled and sharp (lanczos shader).
+            data.put("screenSize", "1280x960");
             data.put("envVars", "MESA_EXTENSION_MAX_YEAR=2003 LANG=zh_TW.UTF-8 LC_ALL=zh_TW.UTF-8");
             data.put("graphicsDriver", "turnip,gladio");
             data.put("dxwrapper", "wined3d");
